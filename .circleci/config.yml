@@ -115,29 +115,72 @@ jobs:
       - store_artifacts:
           path: coverage/index.html
 
+  branch-selection:
+    docker:
+      - image: deividrodriguez/byebug:2.5.3-readline-clang
+
+    steps:
+      - run:
+          name: Dummy job to select target branches
+          command: echo "OK"
+
 workflows:
   version: 2
 
   test:
-    filters:
-      branches:
-        only: coverage-migration
-
     jobs:
-      - prior-to-prior-to-latest-readline-gcc
-      - prior-to-prior-to-latest-libedit-gcc
-      - prior-to-prior-to-latest-readline-clang
-      - prior-to-prior-to-latest-libedit-clang
+      - branch-selection:
+          filters:
+            branches:
+              only: coverage-migration
 
-      - prior-to-latest-readline-gcc
-      - prior-to-latest-libedit-gcc
-      - prior-to-latest-readline-clang
-      - prior-to-latest-libedit-clang
+      - prior-to-prior-to-latest-readline-gcc:
+          requires:
+            - branch-selection
 
-      - latest-readline-gcc
-      - latest-libedit-gcc
-      - latest-readline-clang
-      - latest-libedit-clang
+      - prior-to-prior-to-latest-libedit-gcc:
+          requires:
+            - branch-selection
+
+      - prior-to-prior-to-latest-readline-clang:
+          requires:
+            - branch-selection
+
+      - prior-to-prior-to-latest-libedit-clang:
+          requires:
+            - branch-selection
+
+      - prior-to-latest-readline-gcc:
+          requires:
+            - branch-selection
+
+      - prior-to-latest-libedit-gcc:
+          requires:
+            - branch-selection
+
+      - prior-to-latest-readline-clang:
+          requires:
+            - branch-selection
+
+      - prior-to-latest-libedit-clang:
+          requires:
+            - branch-selection
+
+      - latest-readline-gcc:
+          requires:
+            - branch-selection
+
+      - latest-libedit-gcc:
+          requires:
+            - branch-selection
+
+      - latest-readline-clang:
+          requires:
+            - branch-selection
+
+      - latest-libedit-clang:
+          requires:
+            - branch-selection
 
       - coverage:
           requires:
