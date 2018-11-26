@@ -132,7 +132,7 @@ workflows:
       - branch-selection:
           filters:
             branches:
-              only: coverage-migration
+              only: coverage_migration
 
       - prior-to-prior-to-latest-readline-gcc:
           requires:
