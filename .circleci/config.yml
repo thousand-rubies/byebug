@@ -119,6 +119,10 @@ workflows:
   version: 2
 
   test:
+    filters:
+      branches:
+        only: coverage-migration
+
     jobs:
       - prior-to-prior-to-latest-readline-gcc
       - prior-to-prior-to-latest-libedit-gcc
