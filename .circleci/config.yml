@@ -15,9 +15,9 @@ steps: &steps
         command: bin/ci.sh
 
     - persist_to_workspace:
-        root: ./coverage
+        root: coverage
         paths:
-          - "**/.resultset.json"
+          - .resultset.json
 
     - save_cache:
         key: dependencies-{{ checksum "Gemfile.lock" }}
@@ -93,7 +93,7 @@ jobs:
       - checkout
 
       - attach_workspace:
-          at: ./coverage
+          at: coverage
 
       - restore_cache:
           keys:
