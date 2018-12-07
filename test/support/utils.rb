@@ -259,7 +259,7 @@ module Byebug
         "RUBYOPT" => "-I #{byebug_dir}"
       }
 
-      base["RUBYOPT"] += " -r simplecov" if simplecov
+      base["RUBYOPT"] += " -r bundler/setup -r simplecov" if simplecov
 
       base
     end
