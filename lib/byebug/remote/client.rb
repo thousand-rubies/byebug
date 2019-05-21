@@ -48,6 +48,8 @@ module Byebug
       private
 
       def connect_at(host, port)
+        return if started?
+
         interface.puts "Connecting to byebug server at #{host}:#{port}..."
         @socket = TCPSocket.new(host, port)
         interface.puts "Connected."
