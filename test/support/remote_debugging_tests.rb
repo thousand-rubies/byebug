@@ -59,7 +59,7 @@ module Byebug
       remote_debug(*commands) do |wait_th|
         launch_client
 
-        wait_for_client_startup
+        wait_for_client_to_connect
 
         wait_th.value
       end
@@ -69,7 +69,7 @@ module Byebug
       remote_debug(*commands) do |wait_th|
         th = Thread.new { launch_client }
 
-        wait_for_client_startup
+        wait_for_client_to_connect
 
         th.kill
 
@@ -85,7 +85,7 @@ module Byebug
       end
     end
 
-    def wait_for_client_startup
+    def wait_for_client_to_connect
       sleep 0.1 until mutex.synchronize { client.started? }
     end
 
