@@ -10,27 +10,19 @@ jobs:
 
     strategy:
       matrix:
-        version: ["2.4.x", "2.5.x", "2.6.x", "head"]
+        version: ["2.4.9-1", "2.5.7-1", "2.6.5-1", "head"]
 
     steps:
       - uses: actions/checkout@master
 
-      - name: Setup released rubies
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.version }}
-        if: matrix.version != 'head'
-
-      - name: Setup ruby-head
+      - name: Setup ruby
         run: |
-          $(new-object net.webclient).DownloadFile("https://github.com/oneclick/rubyinstaller2/releases/download/rubyinstaller-head/rubyinstaller-${{ matrix.version }}-x64.exe", "$pwd/ruby-setup.exe")
+          $(new-object net.webclient).DownloadFile("https://github.com/oneclick/rubyinstaller2/releases/download/rubyinstaller-${{ matrix.version }}/rubyinstaller-${{ matrix.version }}-x64.exe", "$pwd/ruby-setup.exe")
           cmd /c ruby-setup.exe /verysilent /dir=C:/Ruby${{ matrix.version }}-x64
-        if: matrix.version == 'head'
 
       - name: Setup path for ruby-head
         run: set PATH=C:\Ruby${{ matrix.version }}-x64\bin;C:\Program Files\Git\cmd;C:/Windows/system32;C:\Program Files\Git\usr\bin
         shell: cmd
-        if: matrix.version == 'head'
 
       - name: Run CI checks
         run: |
