@@ -15,19 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: Download ruby installer
+      - name: Setup ruby
         run: |
           $(new-object net.webclient).DownloadFile("https://github.com/oneclick/rubyinstaller2/releases/download/rubyinstaller-${{ matrix.version }}/rubyinstaller-${{ matrix.version }}-x64.exe", "$pwd/ruby-setup.exe")
           cmd /c ruby-setup.exe /verysilent /dir=C:/Ruby${{ matrix.version }}-x64
-        if: matrix.version != 'head'
 
-      - name: Download ruby-head installer
-        run: |
-          $(new-object net.webclient).DownloadFile("https://github.com/oneclick/rubyinstaller2/releases/download/rubyinstaller-${{ matrix.version }}/rubyinstaller-${{ matrix.version }}-x64.exe", "$pwd/ruby-setup.exe")
-          cmd /c ruby-setup.exe /verysilent /dir=C:/Ruby${{ matrix.version }}-x64
-        if: matrix.version == 'head'
-
-      - name: Put installed ruby in path
+      - name: Setup path for ruby-head
         run: set PATH=C:\Ruby${{ matrix.version }}-x64\bin;C:\Program Files\Git\cmd;C:/Windows/system32;C:\Program Files\Git\usr\bin
         shell: cmd
 
