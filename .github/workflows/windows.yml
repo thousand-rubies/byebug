@@ -27,8 +27,10 @@ jobs:
           cmd /c ruby-setup.exe /verysilent /dir=C:/Ruby${{ matrix.version }}-x64
         if: matrix.version == 'head'
 
-      - name: Put installed ruby in path
-        run: set PATH=%PATH%;C:\Ruby${{ matrix.version }}-x64\bin
+      - name: Setup ruby
+        run: |
+          set PATH=%PATH%;C:\Ruby${{ matrix.version }}-x64\bin
+          ridk enable
         shell: cmd
 
       - name: Run CI checks
