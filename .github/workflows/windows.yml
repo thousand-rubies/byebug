@@ -17,7 +17,7 @@ jobs:
 
       - name: Download ruby installer
         run: |
-          $(new-object net.webclient).DownloadFile("https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-${{ matrix.version }}/rubyinstaller-${{ matrix.version }}-x64.exe", "$pwd/ruby-setup.exe")
+          $(new-object net.webclient).DownloadFile("https://github.com/oneclick/rubyinstaller2/releases/download/rubyinstaller-${{ matrix.version }}/rubyinstaller-${{ matrix.version }}-x64.exe", "$pwd/ruby-setup.exe")
           cmd /c ruby-setup.exe /verysilent /dir=C:/Ruby${{ matrix.version }}-x64
         if: matrix.version != 'head'
 
