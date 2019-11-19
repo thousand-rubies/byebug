@@ -10,13 +10,13 @@ jobs:
 
     strategy:
       matrix:
-        version: ["2.4.x", "2.5.x", "2.6.x"]
+        version: ["2.4.x", "2.5.x", "2.6.x", "9.9.x"]
 
     steps:
       - uses: actions/checkout@master
 
       - name: Setup released rubies
-        uses: actions/setup-ruby@v1
+        uses: MSP-Greg/actions-ruby@master
         with:
           ruby-version: ${{ matrix.version }}
 
