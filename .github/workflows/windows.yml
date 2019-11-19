@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        version: ["2.4.x", "2.5.x", "2.6.x", "9.9.x"]
+        version: ["2.4.x", "2.5.x", "2.6.x"]
 
     steps:
       - uses: actions/checkout@master
