@@ -5,7 +5,7 @@ set -eo pipefail
 set +x
 
 gem update --system 3.1.2 --conservative --no-document
-gem install bundler --version 2.1.4 --force
+gem install bundler --version 2.1.4 --force --conservative --no-document
 
 bundle install --jobs 3 --retry 3
 
