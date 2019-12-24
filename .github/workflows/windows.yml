@@ -23,6 +23,7 @@ jobs:
       - name: Run CI checks
         run: |
           bin/setup.sh
+          ruby -rbundler/setup -e 'require "readline"; puts $LOADED_FEATURES.select{|r| r =~ /readline/}'
           bin/rake compile test
         shell: bash
 
