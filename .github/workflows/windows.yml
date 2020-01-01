@@ -22,13 +22,14 @@ jobs:
 
       - name:
         run: |
+          bin/setup_rubygems_and_bundler.sh
           git clone -q --depth=5  --no-tags --branch=byebug https://github.com/MSP-greg/rb-readline.git /tmp/rb-readline
           cd /tmp/rb-readline
           rake install
 
       - name: Run CI checks
         run: |
-          bin/setup.sh
+          bundle install --jobs 3 --retry 3
           ruby -rbundler/setup -e 'require "readline"; puts $LOADED_FEATURES.select{|r| r =~ /readline/}'
           bin/rake compile test
         shell: bash
