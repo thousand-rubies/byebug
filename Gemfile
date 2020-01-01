@@ -14,4 +14,3 @@ gem "rubocop", "0.78.0"
 gem "rubocop-performance", "~> 1.3"
 gem "simplecov", "0.17.1"
 gem "yard", "0.9.22"
-gem "rb-readline", git: "https://github.com/MSP-greg/rb-readline", branch: "byebug", platforms: %i[mingw mswin x64_mingw]
