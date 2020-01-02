@@ -26,6 +26,7 @@ jobs:
           git clone -q --depth=5  --no-tags --branch=byebug https://github.com/MSP-greg/rb-readline.git /tmp/rb-readline
           cd /tmp/rb-readline
           rake install
+        shell: bash
 
       - name: Run CI checks
         run: |
