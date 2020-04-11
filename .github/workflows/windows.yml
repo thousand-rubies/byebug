@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        version: [2.4, 2.5, 2.6, head]
+        version: [2.5, 2.6, head]
 
     steps:
       - uses: actions/checkout@v2
@@ -28,6 +28,11 @@ jobs:
 
       - name: Install dependencies
         run: bundle install
+
+      - name: Debug
+        run: |
+          path
+          which gmake
 
       - name: Run CI checks
         run: bundle exec rake
