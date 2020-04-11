@@ -20,23 +20,12 @@ jobs:
           path: .bundle
           key: gems-${{ hashFiles('**/Gemfile.lock') }}
 
-      - name: Upgrade rubygems
-        run: gem update --system 3.1.2 --no-document
-
-      - name: Install bundler
-        run: gem install bundler:2.1.4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.version }}
 
       - name: Install dependencies
         run: bundle install
-
-      - name: Debug PATH
-        run: $env:path
-
-      - name: Set PATH
-        run: '[Environment]::SetEnvironmentVariable("Path", "C:\hostedtoolcache\windows\Ruby\${{ matrix.version }}\x64\bin;C:\Program Files\Git\cmd;C:\windows\system32;C:\Program Files\Git\usr\bin", "Machine")'
-
-      - name: Debug gmake
-        run: which gmake
 
       - name: Run CI checks
         run: bundle exec rake
